@@ -1,0 +1,57 @@
+public class User {
+    public static int count = 0;
+    private String name;
+    private String surname;
+    public String fiscalCode;
+
+    public User(String name, String surname){
+        this.name = name;
+        this.surname = surname;
+        this.fiscalCode = this.generateFCSurame() + this.generateFCName();
+        count++;
+    }
+
+    public String generateFCName() {
+        char[] chars = this.name.toLowerCase().toCharArray();
+        String consonants = "";
+        String vowels = "";
+        for (int i=0; i < chars.length; i++){
+            char ch = chars[i];
+            if(ch == 'a' || ch == 'e' || ch == 'i'
+                    || ch == 'o' || ch == 'u') {
+                vowels += ch;
+            } else if (ch != ' '){
+                consonants += ch;
+            }
+        }
+        switch (consonants.length()){
+            case 0: return "" + vowels.charAt(0) + vowels.charAt(1) + vowels.charAt(2);
+            case 1: return "" + consonants.charAt(0) + vowels.charAt(0) + vowels.charAt(1);
+            case 2: return "" + consonants.charAt(0) + consonants.charAt(1) + vowels.charAt(0);
+            case 3: return "" + consonants.charAt(0) + consonants.charAt(1) + consonants.charAt(2);
+            default: return "" + consonants.charAt(0) + consonants.charAt(2) + consonants.charAt(3);
+        }
+    }
+
+    public String generateFCSurame() {
+        char[] chars = this.surname.toLowerCase().toCharArray();
+        String consonants = "";
+        String vowels = "";
+        for (int i=0; i < chars.length; i++){
+            char ch = chars[i];
+            if(ch == 'a' || ch == 'e' || ch == 'i'
+                    || ch == 'o' || ch == 'u') {
+                vowels += ch;
+            } else if (ch != ' '){
+                consonants += ch;
+            }
+        }
+        switch (consonants.length()){
+            case 0: return "" + vowels.charAt(0) + vowels.charAt(1) + vowels.charAt(2);
+            case 1: return "" + consonants.charAt(0) + vowels.charAt(0) + vowels.charAt(1);
+            case 2: return "" + consonants.charAt(0) + consonants.charAt(1) + vowels.charAt(0);
+            default: return "" + consonants.charAt(0) + consonants.charAt(1) + consonants.charAt(2);
+        }
+    }
+
+}
